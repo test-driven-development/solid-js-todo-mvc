@@ -25,6 +25,7 @@ const App = () => {
             {todo => (
               <li class="todo">
                 <div class="view">
+                  <input type="checkbox" class="toggle" />
                   <label>{todo.title}</label>
                 </div>
               </li>
