@@ -27,6 +27,7 @@ const App = () => {
                 <div class="view">
                   <input type="checkbox" class="toggle" />
                   <label>{todo.title}</label>
+                  <button class="destroy" />
                 </div>
               </li>
             )}
