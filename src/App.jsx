@@ -1,6 +1,10 @@
 // noinspection JSXNamespaceValidation
 
+import {createSignal} from 'solid-js'
+
 const App = () => {
+  const [todos, setTodos] = createSignal([])
+
   return (
     <section class="todoapp">
       <header class="header">
