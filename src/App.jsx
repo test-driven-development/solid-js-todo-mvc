@@ -32,6 +32,14 @@ const App = () => {
     }
   }
 
+  const toggle = id => {
+    setTodos(todos =>
+      todos.map(todo =>
+        todo.id !== id ? todo : {...todo, completed: !todo.completed},
+      ),
+    )
+  }
+
   // noinspection JSValidateTypes
   return (
     <section class="todoapp">
@@ -49,9 +57,19 @@ const App = () => {
         <ul class="todo-list">
           <For each={todos()}>
             {todo => (
-              <li class="todo">
+              <li
+                class="todo"
+                classList={{
+                  completed: todo.completed,
+                }}
+              >
                 <div class="view">
-                  <input type="checkbox" class="toggle" />
+                  <input
+                    type="checkbox"
+                    class="toggle"
+                    checked={todo.completed}
+                    onInput={() => toggle(todo.id)}
+                  />
                   <label>{todo.title}</label>
                   <button class="destroy" />
                 </div>
