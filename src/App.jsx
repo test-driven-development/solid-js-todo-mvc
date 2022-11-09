@@ -1,9 +1,10 @@
 // noinspection JSXNamespaceValidation
 
-import {createMemo, createSignal, For, Show} from 'solid-js'
+import {createMemo, createSignal, For, onCleanup, Show} from 'solid-js'
 
 const App = () => {
   const [todos, setTodos] = createSignal([])
+  const [showMode, setShowMode] = createSignal()
   const todosRemaining = createMemo(
     () => todos().length - todos().filter(todo => todo.completed).length,
   )
@@ -51,6 +52,16 @@ const App = () => {
       })),
     )
   }
+
+  const locationHandler = () => {
+    setShowMode(location.hash.slice(2) || 'all')
+  }
+
+  window.addEventListener('hashchange', locationHandler)
+
+  onCleanup(() => {
+    window.removeEventListener('hashchange', locationHandler)
+  })
 
   // noinspection JSValidateTypes
   return (
@@ -104,6 +115,29 @@ const App = () => {
             <strong>{todosRemaining()}</strong>
             {todosRemaining() === 1 ? ' item ' : ' items '} left
           </span>
+          <ul class="filters">
+            <li>
+              <a href="#/all" classList={{selected: showMode() === 'all'}}>
+                All
+              </a>
+            </li>
+            <li>
+              <a
+                href="#/active"
+                classList={{selected: showMode() === 'active'}}
+              >
+                Active
+              </a>
+            </li>
+            <li>
+              <a
+                href="#/completed"
+                classList={{selected: showMode() === 'completed'}}
+              >
+                Completed
+              </a>
+            </li>
+          </ul>
         </footer>
       </Show>
     </section>
