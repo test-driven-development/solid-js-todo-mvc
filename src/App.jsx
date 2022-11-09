@@ -1,9 +1,12 @@
 // noinspection JSXNamespaceValidation
 
-import {createSignal, For, Show} from 'solid-js'
+import {createMemo, createSignal, For, Show} from 'solid-js'
 
 const App = () => {
   const [todos, setTodos] = createSignal([])
+  const todosRemaining = createMemo(
+    () => todos().length - todos().filter(todo => todo.completed).length,
+  )
 
   const ENTER_KEY = 13
   const ESCAPE_KEY = 25
@@ -68,6 +71,7 @@ const App = () => {
             type="checkbox"
             id="toggle-all"
             class="toggle-all"
+            checked={!todosRemaining()}
             onInput={toggleAll}
           />
           <label for="toggle-all"></label>
