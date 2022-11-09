@@ -44,6 +44,17 @@ const App = () => {
     setTodos(todos => todos.filter(todo => todo.id !== id))
   }
 
+  const toggleAll = event => {
+    const completed = event.target.checked
+    // noinspection JSCheckFunctionSignatures
+    setTodos(todos =>
+      todos.map(todo => ({
+        ...todo,
+        completed,
+      })),
+    )
+  }
+
   // noinspection JSValidateTypes
   return (
     <section class="todoapp">
@@ -58,6 +69,38 @@ const App = () => {
       </header>
 
       <Show when={todos().length > 0} keyed>
+        <section class="main">
+          <input
+            type="checkbox"
+            id="toggle-all"
+            class="toggle-all"
+            onInput={toggleAll}
+          />
+          <label for="toggle-all"></label>
+          <ul class="todo-list">
+            <For each={todos()}>
+              {todo => (
+                <li
+                  class="todo"
+                  classList={{
+                    completed: todo.completed,
+                  }}
+                >
+                  <div class="view">
+                    <input
+                      type="checkbox"
+                      class="toggle"
+                      checked={todo.completed}
+                      onInput={() => toggle(todo.id)}
+                    />
+                    <label>{todo.title}</label>
+                    <button class="destroy" onClick={() => remove(todo.id)} />
+                  </div>
+                </li>
+              )}
+            </For>
+          </ul>
+        </section>
       </Show>
     </section>
   )
