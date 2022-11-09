@@ -99,6 +99,12 @@ const App = () => {
             </For>
           </ul>
         </section>
+        <footer class="footer">
+          <span class="todo-count">
+            <strong>{todosRemaining()}</strong>
+            {todosRemaining() === 1 ? ' item ' : ' items '} left
+          </span>
+        </footer>
       </Show>
     </section>
   )
