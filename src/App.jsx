@@ -58,29 +58,6 @@ const App = () => {
       </header>
 
       <Show when={todos().length > 0} keyed>
-        <ul class="todo-list">
-          <For each={todos()}>
-            {todo => (
-              <li
-                class="todo"
-                classList={{
-                  completed: todo.completed,
-                }}
-              >
-                <div class="view">
-                  <input
-                    type="checkbox"
-                    class="toggle"
-                    checked={todo.completed}
-                    onInput={() => toggle(todo.id)}
-                  />
-                  <label>{todo.title}</label>
-                  <button class="destroy" onClick={() => remove(todo.id)} />
-                </div>
-              </li>
-            )}
-          </For>
-        </ul>
       </Show>
     </section>
   )
