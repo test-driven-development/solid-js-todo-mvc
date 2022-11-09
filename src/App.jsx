@@ -40,6 +40,10 @@ const App = () => {
     )
   }
 
+  const remove = id => {
+    setTodos(todos => todos.filter(todo => todo.id !== id))
+  }
+
   // noinspection JSValidateTypes
   return (
     <section class="todoapp">
@@ -71,7 +75,7 @@ const App = () => {
                     onInput={() => toggle(todo.id)}
                   />
                   <label>{todo.title}</label>
-                  <button class="destroy" />
+                  <button class="destroy" onClick={() => remove(todo.id)} />
                 </div>
               </li>
             )}
