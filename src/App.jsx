@@ -63,6 +63,13 @@ const App = () => {
     window.removeEventListener('hashchange', locationHandler)
   })
 
+  const filterTodos = todos => {
+    if (showMode() === 'active') return todos.filter(todo => !todo.completed)
+    else if (showMode() === 'completed')
+      return todos.filter(todo => todo.completed)
+    return todos
+  }
+
   // noinspection JSValidateTypes
   return (
     <section class="todoapp">
@@ -87,7 +94,7 @@ const App = () => {
           />
           <label for="toggle-all"></label>
           <ul class="todo-list">
-            <For each={todos()}>
+            <For each={filterTodos(todos())}>
               {todo => (
                 <li
                   class="todo"
