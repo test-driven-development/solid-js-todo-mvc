@@ -70,6 +70,10 @@ const App = () => {
     return todos
   }
 
+  const clearCompleted = () => {
+    setTodos(todos => todos.filter(todo => !todo.completed))
+  }
+
   // noinspection JSValidateTypes
   return (
     <section class="todoapp">
@@ -145,6 +149,11 @@ const App = () => {
               </a>
             </li>
           </ul>
+          <Show when={todosRemaining() !== todos().length} keyed>
+            <button class="clear-completed" onClick={clearCompleted}>
+              Clear Completed
+            </button>
+          </Show>
         </footer>
       </Show>
     </section>
