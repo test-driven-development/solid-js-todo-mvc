@@ -3,13 +3,7 @@
 import {createSignal, For, Show} from 'solid-js'
 
 const App = () => {
-  const [todos, setTodos] = createSignal([
-    {
-      id: 1,
-      title: 'Dummy todo',
-      completed: false,
-    },
-  ])
+  const [todos, setTodos] = createSignal([])
 
   const ENTER_KEY = 13
   const ESCAPE_KEY = 25
