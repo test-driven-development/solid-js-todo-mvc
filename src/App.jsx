@@ -19,6 +19,7 @@ const App = () => {
     const title = event.target.value.trim()
     if (event.keyCode === ENTER_KEY && title) {
       setTodos(todos => {
+        event.target.value = null
         return [
           ...todos,
           {
